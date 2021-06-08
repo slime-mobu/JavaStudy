@@ -1,0 +1,285 @@
+public class HelloWorld {
+    public static void main(String[] args) {
+        // 单行注释
+        // 输出一个Hello,World!
+        System.out.println("Hello,World!");
+        /*
+        * 多行注释
+        * 可以注释一段文字
+        * */
+        // JavaDoc：文档注释  /** */
+        /**
+         * @Description HelloWorld
+         * @Author  Slimety
+         */
+    }
+}
+
+public class Demo02 {
+    public static void main(String[] args) {
+        // 八大基本数据类型
+
+        // 整数
+        int num1 = 10;// 最常用
+        byte num2 = 20;
+        short num3 = 30;
+        long num4 = 40L;// Long 类型要在数字后面加个L
+
+        // 小数：浮点数
+        float num5 = 50.1F;// float 类型要在数字后面加个F
+        double num6 = 3.141592653589793238462643;
+
+        // 字符
+        char name = 'A';
+        // 字符串,String不是关键字，而是类
+        String namea = "Slimety";
+
+        // 布尔值：是非
+        boolean flag = true;
+        // boolean flag = false;
+    }
+}
+
+public class Demo03 {
+    public static void main(String[] args) {
+        // 整数拓展： 进制   二进制0b  十进制   八进制0   十六进制0x
+
+        int i = 10;
+        int i1 = 010;// 八进制0
+        int i2 = 0x10;// 十六进制0x  0~9  A~F  16
+
+        System.out.println(i);
+        System.out.println(i1);
+        System.out.println(i2);
+        System.out.println("=========================");
+        // ===============================================
+        // 浮点数拓展？  银行业务怎么表示？  钱
+        // BigDecimal  数学工具类
+        // ===============================================
+        // float   有限  离散  舍入误差  大约   接近但不等于
+        // double
+        // 最好完全避免使用浮点数进行比较
+        // 最好完全避免使用浮点数进行比较
+        // 最好完全避免使用浮点数进行比较
+
+        float f = 0.1f;
+        double d = 1.0 / 10;
+
+        System.out.println(f == d);//false
+
+        float d1 = 2215451313134f;
+        float d2 = d1 + 1;
+
+        System.out.println(d1 == d2);// true
+
+        // ===============================================
+        // 字符拓展？
+        // ===============================================
+        System.out.println("=========================");
+        char c1 = 'a';
+        char c2 = '中';
+
+        System.out.println(c1);
+        System.out.println((int) c1);// 强制转换
+        System.out.println(c2);
+        System.out.println((int) c2);// 强制转换
+
+        // 所有的字符本质还是数字
+        // 编码 Unicode   2字节  0-65536   Excel  2的16次方 = 65536
+
+        // u0000  uFFFF
+
+        char c3 = '\u0061';
+        System.out.println(c3);// a
+
+        // 转义字符
+        // \t  制表符
+        // \n 换行
+        // 。。。。
+        System.out.println("Hello\tWorld!");
+
+        System.out.println("=========================");
+        String sa = new String("hello world");
+        String sb = new String("hello world");
+        System.out.println(sa == sb);
+
+        String sc = "hello world";
+        String sd = "hello world";
+        System.out.println(sc == sd);
+        // 对象  从内存分析
+
+        // 布尔值扩展
+        boolean flag = true;
+        if (flag == true) {
+        }
+        if(flag){}
+        // Less is More!  代码要精简易读
+    }
+}
+
+public class Demo04 {
+    public static void main(String[] args) {
+        int i = 128;
+        byte b = (byte)i;// 内存溢出
+
+        // 强制转换   (类型)变量名  高--->低
+
+        System.out.println(i);
+        System.out.println(b);
+    }
+}
+
+public class Demo04 {
+    public static void main(String[] args) {
+        int i = 128;
+        double c = i;
+
+        // 强制转换   (类型)变量名  低--->高
+
+        System.out.println(i);
+        System.out.println(c);
+    }
+}
+
+type varName [=value] [{,varName[=value]}];
+// 数据类型  变量名 =  值 ; 可以使用逗号隔开来声明多个同类型变量
+
+public class Demo07 {
+
+    // 类变量  static
+    static double salary = 2500;
+
+    // 属性：变量
+
+    // 实例变量：从属于对象;如果不自行初始化，这个类型的默认值 0 0.0
+    // 布尔值：默认是false
+    // 除了基本类型，其余的默认值都是null；
+    String name;
+    int age;
+
+    // main方法
+    public static void main(String[] args) {
+
+
+        // 局部变量
+        int i = 10;
+        System.out.println(i);
+
+        // 变量类型  变量名字  = new  Demo07();
+        Demo07 demo07 = new Demo07();
+        System.out.println(demo07.age);
+
+        // 类变量  static
+        System.out.println(salary);
+    }
+}
+
+
+final 常量名 = 值;
+final double PI = 3.14;
+
+
+public static void main(String[] args) {
+        // 二元运算符
+        int a = 10;
+        int b = 20;
+        int c = 25;
+        int d = 25;
+
+        System.out.println(a+b);
+        System.out.println(a-b);
+        System.out.println(a*b);
+        System.out.println(a/(double)b);
+    }
+    
+    
+    public static void main(String[] args) {
+        // ++   --  自增，自减   一元运算符
+        int a = 3;
+
+        int b = a++;// 先赋值再加加
+        // a = a + 1;
+        System.out.println(a);
+        int c = ++a;// 先加加再赋值
+
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+    }
+    
+    
+    public static void main(String[] args) {
+        // 关系运算符返回的结果： 正确，错误   布尔值
+
+        int a = 10;
+        int b = 20;
+        int c = 21;
+
+        System.out.println(c%a);// 21/10=2...1
+
+        System.out.println(a>b);
+        System.out.println(a<b);
+        System.out.println(a==b);
+        System.out.println(a!=b);
+    }
+    
+    
+  public static void main(String[] args) {
+        // 与   或   非
+        boolean a = true;
+        boolean b = false;
+
+        System.out.println("a && b:"+(a&&b));// 逻辑与运算：两个变量都为真，结果才为true
+        System.out.println("a || b:"+(a||b));// 逻辑或运算：两个变量有一个为真，结果为true
+        System.out.println("!(a && b):"+!(a&&b));// 如果是真，则变为假，如果为假，则变为真
+
+        // 短路运算
+        int c = 5;
+        boolean d = (c<4)&&(c++<4);
+        System.out.println(d);
+        System.out.println(c);
+
+    }
+    
+    
+public static void main(String[] args) {
+        /*
+        A = 0011 1100
+        B = 0000 1101
+        -------------------------
+        A&B = 0000 1100
+        A|B = 0011 1101
+        A^B = 0011 0001  相同为零，不同为一
+        ~B = 1111 0010
+
+        2*8 = 16 2*2*2*2   面试
+        效率极高！！！
+        <<  *2
+        >>  /2
+         */
+        System.out.println(2<<3);
+    }
+    
+    public static void main(String[] args) {
+        // x ? y : z
+        // 如果x==true,则结果为y,否则结果为z
+
+        int score = 50;
+        String type = score < 60 ? "不及格":"及格";
+        // if
+        System.out.println(type);
+    }
+    
+  public static void main(String[] args) {
+        int a = 10;
+        int b = 20;
+
+        a+=b;// a = a+b
+        a-=b;// a = a-b
+
+        System.out.println(a);
+
+        // 字符串连接符  +  , String  面试
+        System.out.println(""+a+b);
+        System.out.println(a+b+"");
+    }
