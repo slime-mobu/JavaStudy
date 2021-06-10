@@ -1,0 +1,18 @@
+#盘符切换 切换为D盘即D:
+#查看当前目录下的所有文件  dir
+#切换目录  cd  change directory  cd /d 盘符:\文件夹名 切换至其他盘符  cd 文件夹名  进入该文件夹
+#返回上一级 cd ..
+#清理屏幕 cls
+#退出终端 exit
+# 查看电脑ip ipconfig
+#打开计算机 calc
+#打开画图工具 mspaint
+#打开记事本 notepad
+#ping 命令 ping www.baidu.com
+#文件操作
+	md 目录名 创建目录
+	rd 目录名 删除目录
+	cd> 文件名 创建文件
+	del 文件名 删除文件
+  
+  
