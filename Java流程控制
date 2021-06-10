@@ -1,0 +1,297 @@
+public static void main(String[] args) {
+
+    // 创建一个扫描器对象，用于接收键盘数据
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("使用next方式接收：");
+
+    // 判断用户有没有输入字符串
+    if(scanner.hasNext()){
+        // 使用next方式接收
+        String str = scanner.next();
+        System.out.println("输出的内容为："+str);
+    }
+
+    // 凡是属于IO流的类如果不关闭会一直占用资源，要养成好习惯用完就关
+    scanner.close();
+}
+
+public static void main(String[] args) {
+    //
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("使用nextLine方式接收：");
+
+    // 判断是否还有输入
+    if(scanner.hasNextLine()){
+        String str = scanner.nextLine();
+        System.out.println("输出的内容为："+str);
+    }
+    scanner.close();
+}
+
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("请输入内容：");
+    String s = scanner.nextLine();
+
+    // equals:判断字符串是否相等
+    if(s.equals("Hello")){
+        System.out.println(s);
+    }
+    System.out.println("End"); 
+    scanner.close();
+}
+
+public static void main(String[] args) {
+    // 考试分数大于60就是及格，否则为不及格
+    Scanner scanner = new Scanner(System.in);
+    int score = scanner.nextInt();
+    if(score>60){
+        System.out.println("及格");
+    }else{
+        System.out.println("不及格");
+    }
+    scanner.close();
+}
+
+if(布尔表达式 1){
+    // 如果布尔表达式1的值为true执行代码
+}else if(布尔表达式 2){
+    // 如果布尔表达式2的值为true执行代码
+}else if(布尔表达式 3){
+    // 如果布尔表达式3的值为true执行代码
+}else{
+    // 如果以上布尔表达式都不为true执行代码
+}
+
+
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    /*
+        if语句至多有1个else语句，else语句在所有的else if 语句之后。
+        if语句可以有若干个else if语句，它们必须在else语句之前
+        一旦其中一个else if 语句检测为true，其他的else if 以及else 语句都将跳过执行
+         */
+
+    System.out.println("请输入成绩：");
+    int score = scanner.nextInt();
+    if(score==100){
+        System.out.println("恭喜满分！");
+    }else if(score < 100 && score >= 90){
+        System.out.println("A级");
+    }else if(score < 90 && score >= 80){
+        System.out.println("B级");
+    }else if(score < 80 && score >= 70){
+        System.out.println("C级");
+    }else if(score < 70 && score >= 60){
+        System.out.println("D级");
+    }else if(score < 60 && score >= 0){
+        System.out.println("不及格");
+    }else{
+        System.out.println("成绩不合法");
+    }
+
+    scanner.close();
+}
+
+if(布尔表达式 1){
+    // 如果布尔表达式 1的值为true执行代码
+    if(布尔表达式 2){
+        // 如果布尔表达式 2的值为true执行代码
+    }
+}
+
+switch(expression){
+    case value:
+        // 语句
+        break;// 可选
+    case value:
+        // 语句
+        break;// 可选
+        // 你可以有任意数量的case语句
+    default:// 可选
+        // 语句
+}
+
+public static void main(String[] args) {
+    // case穿透  // switch 匹配一个具体的值
+    char grade = 'C';
+
+    switch (grade){
+        case 'A':
+            System.out.println("优秀");
+            break;
+        case 'B':
+            System.out.println("良好");
+            break;
+        case 'C':
+            System.out.println("及格");
+            break;
+        case 'D':
+            System.out.println("再接再厉");
+            break;
+        case 'E':
+            System.out.println("挂科");
+            break;
+        default:
+            System.out.println("未知等级");
+    }
+}
+
+public static void main(String[] args) {
+    String name = "slimety";
+    // JDK7的新特性，表达式结果可以是字符串！！！
+    // 字符的本质还是数字
+
+    // 反编译  Java----class(字节码文件)-----反编译(IDEA)
+    switch (name){
+        case "mobu":
+            System.out.println("mobu");
+            break;
+        case "slimety":
+            System.out.println("slimety");
+            break;
+        default:
+            System.out.println("what!");
+    }
+
+}
+
+public static void main(String[] args) {
+    // 输出1-100
+
+    int i = 0;
+    while(i<100){
+        i++;
+        System.out.println(i);
+    }
+}
+public static void main(String[] args) {
+    int sum=0;
+    int i = 0;
+    while(i<100){
+        i++;
+        sum+=i;
+    }
+    System.out.println(sum);
+}
+
+
+public static void main(String[] args) {
+    int sum=0;
+    int i = 0;
+    while(i<100){
+        i++;
+        sum+=i;
+    }
+    System.out.println(sum);
+}
+
+public static void main(String[] args) {
+    int a = 0;
+    while(a<0){
+        System.out.println(a);
+        a++;
+    }
+    System.out.println("===============");
+    do {
+        System.out.println(a);
+        a++;
+    }while(a<0);
+}
+
+public static void main(String[] args) {
+    // 初始化;条件判断;迭代
+    for(int i = 1;i<=100;i++){
+        System.out.println(i);
+    }
+    System.out.println("for循环结束！");
+    /*
+        关于for循环有以下几点说明：
+
+        最先执行初始化步骤。可以声明一种类型，但可初始化一个或多个循环控制变量，也可以是空语句。
+        然后，检测布尔表达式的值。如果为true，循环体被执行。如果为false，循环终止，开始执行循环体后面的语句。
+        执行一次循环后，更新循环控制变量(迭代因子控制循环变量的增减)。
+        再次检测布尔表达式。循环执行上面的过程。
+         */
+    // 死循环
+    for (;;){
+
+    }
+}
+
+public static void main(String[] args) {
+    int oddsum = 0;
+    int evensum = 0;
+    for (int i = 0; i <= 100; i++) {
+        if(i%2==1){// 奇数
+            oddsum+=i;
+        }else{// 偶数
+            evensum+=i;
+        }
+    }
+    System.out.println("奇数和:"+oddsum+"偶数和："+evensum);
+}
+
+
+public static void main(String[] args) {
+    for (int i = 1; i <= 1000; i++) {
+        if (i%5==0){
+            System.out.print(i+"\t");
+        }
+        if(i%(5*3)==0){
+            System.out.println();
+            // System.out.print("\n");
+        }
+    }
+    // print输出后不换行
+    // println输出后换行
+}
+
+
+public static void main(String[] args) {
+    for (int i = 1; i < 10; i++) {
+        for (int j = 1; j <= i; j++) {
+            System.out.print(i+"*"+j+"="+(i*j)+"\t");
+        }
+        System.out.print("\n");
+    }
+}
+
+public static void main(String[] args) {
+    int[] numbers = {10,20,30,40,50};// 定义了一个数组
+
+    for (int i = 0; i < 5; i++) {
+        System.out.println(numbers[i]);
+    }
+    System.out.println("=====================");
+    // 遍历数组的元素
+    for(int x : numbers){// 增强for循环
+        System.out.println(x);
+    }
+}
+
+public static void main(String[] args) {
+    int i = 0;
+    while(i<100){
+        i++;
+        System.out.println(i);
+        if(i==30){
+            break;
+        }
+    }
+}
+
+public static void main(String[] args) {
+    int i = 0;
+    while(i<100){
+        i++;
+        if(i%10==0){
+            System.out.println();
+            continue;
+        }
+        System.out.println(i);
+    }
+}
