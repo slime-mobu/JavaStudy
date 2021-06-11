@@ -1,0 +1,582 @@
+// Demo01 类
+public class Demo01 {
+
+    // main 方法
+    public static void main(String[] args) {
+
+    }
+
+    /*
+    修饰符   返回值类型   方法名(...){
+        // 方法体
+        return 返回值;
+    }
+     */
+    // return 结束方法，返回一个结果。
+    public String sayHello(){
+        return "hello,world!";
+    }
+
+    public int max (int a,int b){
+        return a > b ? a : b;// 三元运算符
+    }
+}
+
+// 学生类
+public class Student {
+    // 非静态方法
+    public void say(){
+        System.out.println("学生说话了");
+    }
+}
+
+public class Demo02 {
+    public static void main(String[] args) {
+        // 实例化这个类 new
+        // 对象类型  对象名  =   对象值;
+
+        Student student = new Student();
+        student.say();
+    }
+
+    // 静态方法   和类一起加载的
+    public static void a(){
+
+    }
+    // 非静态方法  类实例化后  才存在
+    public void b(){
+
+    }
+}
+
+
+
+public class Demo03 {
+
+    public static void main(String[] args) {
+        // 实际参数和形式参数的类型要对应！
+        Demo03.add(1,2);// 静态方法  可用类名直接调用
+    }
+
+    public static int add(int a,int b){
+        return a+b;
+    }
+}
+
+
+// 引用传递:对象，本质还是值传递
+public class Demo05 {
+    public static void main(String[] args) {
+        Person person = new Person();
+
+        System.out.println(person.name);
+
+        Demo05.change(person);
+
+        System.out.println(person.name);
+    }
+    public static void change(Person person){
+        // person 是一个对象：指向的--->Person person = new Person();这是一个具体的人，可以改变属性！
+        person.name = "Slimety";
+    }
+}
+// 定义一个Person类，有一个属性：name
+class Person{
+    String name; // null
+}
+
+
+// 值传递
+public class Demo04 {
+    public static void main(String[] args) {
+        int a = 1;
+        System.out.println(a);
+        Demo04.change(a);
+        System.out.println(a);
+    }
+    // 返回值为空
+    public static void change(int a){
+        a=10;
+    }
+}
+
+public class Student {
+    // 属性：字段
+    String name; // null
+    int age;  // 0
+
+    // 方法
+    public void study(){
+        System.out.println(this.name+"在学习");
+    }
+}
+
+
+public class Application {
+    public static void main(String[] args) {
+        // 类：抽象化，实例化
+        // 类实例化后会返回一个自己的对象！
+        // xiaoming对象就是一个Student类的具体实例！
+
+        Student xiaoming = new Student();
+
+        xiaoming.name = "小明";
+        xiaoming.age = 3;
+
+        System.out.println(xiaoming.name);
+        System.out.println(xiaoming.age);
+    }
+}
+
+
+public class Person {
+
+    // 一个类即使什么都不写，他也会存在一个方法
+    // 显式的定义构造器
+    String name;
+
+    // 实例化初始化
+    // 1.使用new关键字，必须要有构造器
+    // 无参构造
+    public Person(){
+        this.name = "slimety";
+    }
+    // 有参构造: 一旦定义了有参构造，无参构造必须显式定义
+    public Person(String name){
+        this.name = name;
+    }
+}
+
+
+public class Application {
+    public static void main(String[] args) {
+        // new 实例化了一个对象
+        Person person = new Person();
+
+        System.out.println(person.name);
+    }
+}
+
+
+
+// 类  private：私有
+public class Student {
+    // 属性私有
+    private String name; // 姓名
+    private int id;// 学号
+    private char sex;// 性别
+    private int age;
+    // 提供一些可以操作name属性的方法！
+    // 提供一些public的get、set方法
+    // get 获得这个数据
+    public String getName(){
+        return this.name;
+    }
+    // set 给这个数据设置值
+    public void setName(String name){
+        this.name = name;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public char getSex() {
+        return sex;
+    }
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        if(age>120||age<0){
+            this.age = 3;
+        }else{
+            this.age = age;
+        }
+    }
+}
+
+
+/*
+    1.提高程序的安全性，保护数据
+    2.隐藏代码的安全细节
+    3.统一接口
+    4.系统可维护增加了
+ */
+// 一个项目应该只存在一个main方法
+public class Application {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.setName("slimety");
+        System.out.println(s1.getName());
+
+        s1.setAge(999);
+        System.out.println(s1.getAge());
+    }
+}
+
+
+// 在Java中，所有的类，都默认直接或间接继承object
+// Person 人  父类
+public class Person {
+
+    private int money = 10_0000_0000;
+    public void say(){
+        System.out.println("说了一句话");
+    }
+    public int getMoney() {
+        return money;
+    }
+    public void setMoney(int money) {
+        this.money = money;
+    }
+}
+// 派生类，子类
+// 子类继承了父类，就会拥有父类的全部方法！
+public class Student extends Person{
+}
+// 派生类，子类
+public class Teacher extends Person{
+}
+public class Application {
+    public static void main(String[] args) {
+        Student student = new Student();
+        student.say();
+    }
+}
+
+public class Person {
+    public Person() {
+        System.out.println("Person无参执行了");
+    }
+//    public Person(String name) {
+//        System.out.println("Person无参执行了");
+//    }
+    protected  String name = "slimety";
+    public void print(){
+        System.out.println("Person");
+    }
+}
+
+public class Student extends Person{
+    private String name = "ty";
+    public Student() {
+        // 隐藏代码：调用了父类的无参构造
+        super();// 调用父类的构造器，必须要在子类构造器的第一行
+        System.out.println("Student无参执行了");
+    }
+//    public Student() {
+//        super("sliemty");// 当父类只定义了有参构造，就必须显式调用有参super()
+//        System.out.println("Student无参执行了");
+//    }
+    public void print(){
+        System.out.println("Student");
+    }
+
+    public void test1(){
+        print();// Student
+        this.print();// Student
+        super.print();// Person
+    }
+}
+
+public class Application {
+    public static void main(String[] args) {
+        Student student = new Student();
+        student.test1();
+
+    }
+}
+
+public class B {
+    public static void test(){
+        System.out.println("B=>test()");
+    }
+}
+public class A extends B{
+    public static void test(){
+        System.out.println("A=>test()");
+    }
+}
+public class Application {
+    public static void main(String[] args) {
+        // 静态方法：方法的调用只和左边，定义的数据类型有关
+        A a = new A();
+        a.test();
+        // 父类的引用指向了子类
+        B b = new A();
+        b.test();
+    }
+}
+
+public class B {
+    public void test(){
+        System.out.println("B=>test()");
+    }
+}
+public class A extends B{
+    @Override  // 重写
+    public void test() {
+        System.out.println("A=>test()");
+    }
+}
+public class Application {
+    public static void main(String[] args) {
+        A a = new A();
+        a.test();
+
+        // 父类的引用指向了子类
+        B b = new A();// 子类重写了父类的方法
+        b.test();
+    }
+}
+
+public class Person {
+    public void run(){
+        System.out.println("run");
+    }
+}
+public class Student extends Person{
+    @Override
+    public void run() {
+        System.out.println("son");
+    }
+    public void eat(){
+        System.out.println("eat");
+    }
+}
+public class Application {
+    public static void main(String[] args) {
+        // 一个对象的实际类型是确定的
+        // new Student();
+        // new Person();
+
+        // 可以指向的引用类型就不确定了；父类的引用指向子类
+
+        // Student 能调用的方法都是自己的或者调用父类的
+        Student s1 = new Student();
+        // Person 父类型，可以指向子类，但是不能调用子类独有的方法
+        Person s2 = new Student();
+        Object s3 = new Student();
+
+        // 对象能执行哪些方法，主要看对象左边的类型，和右边关系不大！
+        s2.run();// 子类重写了父类的方法，执行了子类的方法
+        s1.run();
+        ((Student)s2).eat();
+        s1.eat();
+    }
+}
+
+public class Person {
+}
+public class Student extends Person{
+    public void go(){
+        System.out.println("go");
+    }
+}
+public class Teacher extends Person{
+}
+public static void main(String[] args) {
+        // Object > String
+        // Object > Person > Teacher
+        // Object > Person > Student
+        Object object = new Student();
+
+        System.out.println(object instanceof Student);// true
+        System.out.println(object instanceof Person);// true
+        System.out.println(object instanceof Object);// true
+        System.out.println(object instanceof Teacher);// false
+        System.out.println(object instanceof String);// false
+        System.out.println("==========================");
+        Person person = new Student();
+        System.out.println(person instanceof Student);// true
+        System.out.println(person instanceof Person);// true
+        System.out.println(person instanceof Object);// true
+        System.out.println(person instanceof Teacher);// false
+        // System.out.println(person instanceof String);// 编译报错
+        System.out.println("==========================");
+        Student student = new Student();
+        System.out.println(student instanceof Student);// true
+        System.out.println(student instanceof Person);// true
+        System.out.println(student instanceof Object);// true
+        // System.out.println(student instanceof Teacher);// 编译报错
+        // System.out.println(person instanceof String);// 编译报错
+    }
+   public static void main(String[] args) {
+        // 高              低
+        Person obj = new Student();
+
+        // student将这个对象转换为Student类型，我们就可以使用Student类型的方法了！
+        ((Student)obj).go();
+        // 子类转换为父类，可能丢失自己的本来的一些方法！
+        Student student = new Student();
+        student.go();
+        Person person = student;
+    }
+    
+    public class Student {
+    private static int age;// 静态变量
+    private double score;// 非静态变量
+    public void run(){
+        go();// 静态方法在类加载后及分配了相应的内存空间
+    }
+    public static void go(){
+
+    }
+    public static void main(String[] args) {
+        Student s1 = new Student();
+
+        System.out.println(Student.age);
+        System.out.println(s1.age);
+        System.out.println(s1.score);
+
+        go();
+    }
+}
+
+public class Person {
+    // 第二个执行
+    {
+        // 代码块(匿名代码块)
+        System.out.println("匿名代码块");
+    }
+    // 第一个执行
+    static {
+        // 静态代码块
+        System.out.println("静态代码块");
+    }
+    // 第三个执行
+    public Person() {
+        System.out.println("构造方法");
+    }
+    public static void main(String[] args) {
+        Person person = new Person();
+    }
+}
+
+// 静态导入包
+import static java.lang.Math.random;
+import static java.lang.Math.PI;
+public class Test {
+    public static void main(String[] args){
+        System.out.println(random());
+        System.out.println(PI);
+    }
+}
+
+// abstract 抽象类  类extends：  单继承   (接口可以多继承)
+public abstract class Action {
+    // 约束 有人帮我们实现
+    // abstract 抽象方法 只有方法名字，没有方法的实现
+    public abstract void doSomething();
+    // 1.不能new这个抽象类，只能靠子类去实现它：约束！
+    // 2.抽象类中可以写普通方法
+    // 3.抽象方法必须在抽象类中
+    // 抽象的抽象：约束
+    // 思考题？  抽象类存在构造器吗？
+    // 存在的意义   抽象出来  提高开发效率
+}
+
+// 抽象类的所有方法，继承了它的子类，都必须要实现它的方法~除非子类也是抽象类
+public class A extends Action{
+    @Override
+    public void doSomething() {
+
+    }
+}
+
+// interface 定义的关键字，接口都需要有实现类
+public interface UserService {
+    // 常量  public static final
+    int AGE = 99;
+    // 接口中的所有定义其实都是抽象的  public abstract
+    void add(String name);
+    void delete(String name);
+    void update(String name);
+    void query(String name);
+}
+public interface TimeService {
+    void Timer();
+}
+// 抽象类： extends
+// 类 可以实现接口 implements 接口
+// 实现了接口的类，就必须重写接口中的方法
+// 多继承 利用接口实现多继承
+public class UserServiceImpl implements UserService,TimeService{
+    @Override
+    public void add(String name) {
+    }
+    @Override
+    public void Timer() {
+    }
+    @Override
+    public void delete(String name) {
+    }
+    @Override
+    public void update(String name) {
+    }
+    @Override
+    public void query(String name) {
+    }
+}
+
+public class Outer {
+    private int id=10;
+    public void out(){
+        System.out.println("这是外部类的方法");
+    }
+    public class Inner{
+        public void in(){
+            System.out.println("这是内部类的方法");
+        }
+        // 获得外部类的私有属性
+        public void getID(){
+            System.out.println(id);
+        }
+    }
+    // 静态内部类
+    public static class B{
+
+    }
+    // 局部内部类
+    public void method(){
+        class A{
+
+        }
+    }
+}
+// 一个Java类中可以有多个class类，但是只能有一个public class
+class A{
+
+}
+public class Test {
+    public static void main(String[] args) {
+        // 没有名字初始化类，不用将实力保存到变量中
+        new Apple().eat();
+        UserService userService = new UserService(){
+
+            @Override
+            public void hello() {
+
+            }
+        };
+
+    }
+}
+class Apple{
+    public void eat(){
+        System.out.println("1");
+    }
+}
+interface UserService{
+    public void hello();
+}
+
+    
+
+
+
