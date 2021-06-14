@@ -1,0 +1,218 @@
+// 测试stop
+// 1.建议线程正常停止--->利用次数，不建议死循环。
+// 2.建议使用标志位--->设置一个标志位
+// 3.不要使用stop或者destroy等果实或者JDK不建议使用的方法
+public class TestStop implements Runnable{
+    // 1.设置一个标志位
+    private boolean flag = true;
+
+
+    @Override
+    public void run() {
+        int i = 0;
+        while(flag){
+            System.out.println("run......Thread"+i++);
+        }
+    }
+
+    // 2.设置一个公开的方法停止线程，转换标志位
+
+    public void stop(){
+        this.flag = false;
+    }
+
+    public static void main(String[] args) {
+        TestStop testStop = new TestStop();
+        new Thread(testStop).start();
+
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("main"+i);
+            if(i==900){
+                // 调用stop方法切换标志位，让线程停止
+                testStop.stop();
+                System.out.println("线程该停止了");
+            }
+        }
+    }
+}
+
+public class TestSleep2 {
+
+    public static void main(String[] args) {
+        // 打印当前系统时间
+        Date startTime = new Date(System.currentTimeMillis());// 获取当前系统时间
+        while(true){
+            try {
+                System.out.println(new SimpleDateFormat("HH.mm.ss").format(startTime));
+                startTime = new Date(System.currentTimeMillis());// 更新当前时间
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    // 模拟倒计时
+    public static void tenDown() throws InterruptedException {
+        int num = 10;
+        while(true){
+            Thread.sleep(1000);
+            System.out.println(num--);
+            if(num<=0){
+                break;
+            }
+        }
+    }
+}
+
+// 测试礼让线程
+// 礼让不一定成功，看cpu心情
+public class TestYield {
+    public static void main(String[] args) {
+        MyYield myYield = new MyYield();
+
+        new Thread(myYield,"a").start();
+        new Thread(myYield,"b").start();
+    }
+}
+class MyYield implements Runnable{
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName()+"线程开始执行");
+        Thread.yield();// 礼让
+        System.out.println(Thread.currentThread().getName()+"线程停止执行");
+    }
+}
+
+// 测试join方法 // 想象为插队
+public class TestJoin implements Runnable{
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println("线程vip来了"+i);
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        // 启动我们的线程
+        TestJoin testJoin = new TestJoin();
+        Thread thread = new Thread(testJoin);
+
+        for (int i = 0;i<1000;i++){
+            if(i==200){
+                thread.start();
+                thread.join();// 插队
+            }
+            System.out.println("main"+i);
+        }
+    }
+}
+
+public class TestState {
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(()->{
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("//////");
+        });
+
+        // 观察状态
+        Thread.State state = thread.getState();
+        System.out.println(state);// NEW
+
+        // 观察启动后
+        thread.start();// 启动线程
+        state = thread.getState();
+        System.out.println(state);// Run
+
+        while(state != Thread.State.TERMINATED){// 只要线程不停止，就一直输出状态
+            Thread.sleep(100);
+            state = thread.getState();// 更新线程状态
+            System.out.println(state);// 输出状态
+        }
+    }
+}
+
+import sun.awt.windows.ThemeReader;
+
+//
+public class TestPriority {
+    public static void main(String[] args) {
+        // 主线程默认优先级
+        System.out.println(Thread.currentThread().getName()+"-->"+Thread.currentThread().getPriority());
+
+        MyPriority myPriority = new MyPriority();
+
+        Thread t1 = new Thread(myPriority);
+        Thread t2 = new Thread(myPriority);
+        Thread t3 = new Thread(myPriority);
+        Thread t4 = new Thread(myPriority);
+        Thread t5 = new Thread(myPriority);
+        Thread t6 = new Thread(myPriority);
+
+        // 先设置优先级，再启动
+        t1.start();
+
+        t2.setPriority(1);
+        t2.start();
+
+        t3.setPriority(4);
+        t3.start();
+
+        t4.setPriority(Thread.MAX_PRIORITY);// 10
+        t4.start();
+    }
+}
+class MyPriority implements Runnable{
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName()+"-->"+Thread.currentThread().getPriority());
+    }
+}
+
+// 测试守护线程
+public class TestDeamon {
+    public static void main(String[] args) {
+        God god = new God();
+        You you = new You();
+
+        Thread thread = new Thread(god);
+        thread.setDaemon(true);// 默认是false表示是用户线程，正常的线程都是用户线程...
+
+        thread.start();// 上帝守护线程启动
+
+        new Thread(you).start();// 你 用户线程启动
+    }
+
+}
+
+// 上帝
+class God implements Runnable{
+
+    @Override
+    public void run() {
+        while(true){
+            System.out.println("上帝保佑着你");
+        }
+    }
+}
+
+// 你
+class You implements Runnable{
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 36500; i++) {
+            System.out.println("你一生都开心的活着");
+        }
+        System.out.println("=====goodbye!world!========");
+    }
+}
