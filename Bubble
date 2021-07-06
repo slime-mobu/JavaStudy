@@ -1,0 +1,31 @@
+package com.slimety.datastru.sort;
+
+public class Bubble {
+
+    public static void sort(Comparable[] a){// 对数组内的元素进行排序
+        for (int i = 0; i < a.length-1; i++) {
+            for (int j = 0; j < a.length-i-1; j++) {
+                // 比较索引j和索引j+1处的值
+                if(greater(a[j],a[j+1])){
+                    exch(a,j,j+1);
+                }
+            }
+        }
+//        for(int i=a.length-1;i>0;i--){
+//            for (int j = 0; j <i; j++) {
+//                if (greater(a[j],a[j+1])){
+//                    exch(a,j,j+1);
+//                }
+//            }
+//        }
+    }
+    private static boolean greater(Comparable v,Comparable w){// 判断v是否大于w
+        return v.compareTo(w)>0;
+    }
+    private static void exch(Comparable[] a,int i,int j){// 交换a数组中，索引i和索引j处的值
+        Comparable temp;
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+}
