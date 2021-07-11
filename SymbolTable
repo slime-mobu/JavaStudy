@@ -1,0 +1,90 @@
+package com.slimety.datastru.symbol;
+
+import java.util.Iterator;
+
+public class SymbolTable<Key,Value> {
+    // 记录首结点
+    private Node head;
+
+    // 记录符号表中键值对的个数
+    private int N;
+
+
+    private class Node{
+        // 存储键
+        public Key key;
+        // 存储值
+        public Value value;
+        // 存储下一个结点
+        public Node next;
+        // 创建Node对象
+        public Node(Key key,Value value,Node next){
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+    // 创建SymbolTable对象
+    public SymbolTable(){
+        this.head = new Node(null,null,null);
+        this.N = 0;
+    }
+
+    // 根据键key，找对应的值
+    public Value get(Key key){
+        // 找到键为key的结点
+        Node n = head;
+        while(n.next!=null){
+            n=n.next;
+            if(n.key.equals(key)){
+                return n.value;
+            }
+        }
+        return null;
+    }
+
+    // 向符号表中插入一个键值对
+    public void put(Key key,Value value){
+        // 符号表中已经存在了键为key的键值对时，即找到该节点，替换value值
+        Node n = head;
+        while(n.next!=null){
+            // 变换n
+            n=n.next;
+            // 判断n节点存储的键是否为key，如果是，则替换n结点的值
+            if(n.key.equals(key)){
+                n.value = value;
+                return;
+            }
+        }
+        // 如果符号表中不存在键为key的键值对，即创建新节点，将其插入到链表的头部
+        Node newNode = new Node(key,value,null);
+        Node oldFirst = head.next;
+        newNode.next = oldFirst;
+        head.next = newNode;
+
+        // 元素个数+1
+        N++;
+    }
+
+    // 删除键为key的键值对
+    public void delete(Key key){
+        // 找到键为key的结点，把该节点从链表中删除
+        Node n = head;
+        while(n.next!=null){
+            // 判断n结点的下一个结点的键是否为key，如果是，就删除下一个结点
+            if(n.next.key.equals(key)){
+                n.next = n.next.next;
+                N--;
+                return;
+            }
+            n=n.next;
+        }
+
+    }
+
+    // 获取符号表的大小
+    public int size(){
+        return N;
+    }
+
+}
