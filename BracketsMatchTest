@@ -1,0 +1,35 @@
+package com.slimety.datastru.test;
+
+import com.slimety.datastru.linear.Stack;
+
+public class BracketsMatchTest {
+    public static void main(String[] args) {
+        String str = "(上海(长安)())";
+        boolean match = isMatch(str);
+        System.out.println(str+"中的括号是否匹配："+match);
+    }
+    public static boolean isMatch(String str){
+        // 创建栈对象，用来存储左括号
+        Stack<String> chars = new Stack<>();
+        // 从左往右遍历字符串
+        for (int i = 0; i < str.length(); i++) {
+            String currChar = str.charAt(i)+"";
+            // 判断当前字符是否为左括号，如果是，则把字符放入栈中
+            if(currChar.equals("(")){
+                chars.push(currChar);
+            }else if(currChar.equals(")")){
+                // 继续判断当前字符是否为右括号，如果是，则从栈中弹出一个元素，如果弹出的为null，则证明匹配失败，如果不为null，则证明有左括号
+                String pop = chars.pop();
+                if(pop == null){
+                    return false;
+                }
+            }
+        }
+        // 判断栈中还有没有剩余左括号，如果有则证明括号不匹配
+        if(chars.isEmpty()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+}
