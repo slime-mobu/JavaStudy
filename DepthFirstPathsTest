@@ -1,0 +1,38 @@
+package com.slimety.datastru.test;
+
+import com.slimety.datastru.graph.DepthFirstPaths;
+import com.slimety.datastru.graph.Graph;
+import com.slimety.datastru.linear.Stack;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class DepthFirstPathsTest {
+    public static void main(String[] args) throws Exception{
+        // 构建缓冲读取流BufferedReader
+        BufferedReader reader = new BufferedReader(new InputStreamReader(DepthFirstPathsTest.class.getClassLoader().getResourceAsStream("road_find.txt")));
+
+        // 读取第一行数据
+        int total = Integer.parseInt(reader.readLine());
+        // 根据第一行数据构建一幅图
+        Graph g = new Graph(total);
+        // 读取第二行数据
+        int edgeNumbers = Integer.parseInt(reader.readLine());
+        // 继续通过循环读取每一条边关联的两个顶点，调用addEdge方法，添加边
+        for (int i = 0; i < edgeNumbers; i++) {
+            String s = reader.readLine();
+            String[] split = s.split(" ");
+            int i1 = Integer.parseInt(split[0]);
+            int i2 = Integer.parseInt(split[1]);
+            g.addEdge(i1,i2);
+        }
+        // 构建路径查找对象，并设置起点0
+        DepthFirstPaths paths = new DepthFirstPaths(g, 0);
+        // 调用pathTo(4),找到从起点0到顶点4的路径，返回Stack
+        Stack<Integer> stack = paths.pathTo(4);
+        // 遍历栈对象
+        for (Integer integer : stack) {
+            System.out.print(integer+" ");
+        }
+    }
+}
