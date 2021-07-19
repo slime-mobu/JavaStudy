@@ -1,0 +1,32 @@
+package com.slimety.datastru.test;
+
+import com.slimety.datastru.graph.*;
+import com.slimety.datastru.linear.Queue;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class DijkstraSPTest {
+    public static void main(String[] args) throws Exception{
+        // 创建一副加权有向图
+        BufferedReader br = new BufferedReader(new InputStreamReader(DijkstraSPTest.class.getClassLoader().getResourceAsStream("min_route_test.txt")));
+        int total = Integer.parseInt(br.readLine());
+        EdgeWeightedDigraph graph = new EdgeWeightedDigraph(total);
+        int E = Integer.parseInt(br.readLine());
+        for (int i = 0; i < E; i++) {
+            String line = br.readLine();
+            String[] str = line.split(" ");
+            int v = Integer.parseInt(str[0]);
+            int w = Integer.parseInt(str[1]);
+            double weight = Double.parseDouble(str[2]);
+            DirectedEdge edge = new DirectedEdge(v, w, weight);
+            graph.addEdge(edge);
+        }
+        DijkstraSP dijkstraSP = new DijkstraSP(graph, 0);
+        Queue<DirectedEdge> edges = dijkstraSP.pathTo(6);
+
+        for (DirectedEdge edge : edges) {
+            System.out.println(edge.from()+"->"+edge.to()+" :: "+edge.weight());
+        }
+    }
+}
