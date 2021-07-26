@@ -1,0 +1,42 @@
+package com.hspedu.regexp;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Regexp_ {
+    public static void main(String[] args) {
+        // 假定，编写了爬虫，从百度页面得到如下文本
+        // String content = "ARPA网和NSF网最初都是为科研服务的，其主要目的为用户提供共享大型主机的宝贵资源。随着接入主机数量的增加，越来越多的人把internet作为通信和交流的工具。一些公司还陆续在internet上开展了商业活动。随着internet的商业化，其在通信、信息检索、客户服务等方面的巨大潜力被挖掘出来，使internet有了质的飞跃，并最终走向全球。";
+
+//         String content = "<a target=\"_blank\" title=\"国家卫健委:疫苗接种遵循自愿原则\" href=\"/s?wd=%E5%9B%BD%E5%AE%B6%E5%8D%AB%E5%81%A5%E5%A7%94%3A%E7%96%AB%E8%8B%97%E6%8E%A5%E7%A7%8D%E9%81%B5%E5%BE%AA%E8%87%AA%E6%84%BF%E5%8E%9F%E5%88%99&rsv_idx=2&tn=baiduhome_pg&usm=1&ie=utf-8&rsv_cq=%E7%A7%91%E7%8F%AD%E5%87%BA%E8%BA%AB&rsv_dl=0_right_fyb_pchot_20811_01&rsv_pq=dbab8cc20003ffb0&oq=%E7%A7%91%E7%8F%AD%E5%87%BA%E8%BA%AB&rsv_t=b28e0Dh2RwijSbY%2FN0sKfuoVtpXIHJ0kuYUb%2Fv6j2nsD2WjcXm99mlcfIKnEFzgFNbjc&rsf=139c9f7a210ba310fe965fe0afd98c58_1_10_1\" class=\"c-font-medium c-color-t opr-toplist1-subtitle\">\n" +
+//                "                国家卫健委:疫苗接种遵循自愿原则\n" +
+//                "                </a>";
+        String content = "私有地址（Private address）属于非注册地址，专门为组织机构内部使用。\n" +
+                "以下列出留用的内部私有地址\n" +
+                "A类 10.0.0.0--10.255.255.255\n" +
+                "B类 172.16.0.0--172.31.255.255\n" +
+                "C类 192.168.0.0--192.168.255.255";
+        // 提取文章中所有的英文单词
+        // 提取文章中所有的数字
+        // 提取文章中所有的英文单词和数字
+        // (1).传统方法，使用遍历方式，代码量大，效率不高
+        // (2).正则表达式技术
+
+        // 1.先创建一个Pattern对象，模式对象，可以理解成就是一个正则表达式对象
+        // Pattern pattern = Pattern.compile("[a-zA-Z]+");
+        // Pattern pattern = Pattern.compile("[0-9]+");
+        // Pattern pattern = Pattern.compile("([a-zA-Z]+)|([0-9]+)");
+        // Pattern pattern = Pattern.compile("<a target=\"_blank\" title=\"(\\S*)\"");
+        Pattern pattern = Pattern.compile("\\d+\\.\\d+\\.\\d+\\.\\d+");
+
+        // 2.创建一个匹配器对象
+        // 理解: 就是matcher匹配器按照 pattern(模式/样式),到 content 文本中去匹配
+        // 找到就返回true，否则就返回false
+        Matcher matcher = pattern.matcher(content);
+        // 3.可以开始循环匹配
+        while(matcher.find()){
+            // 匹配内容，文本，放到 m.group(0)
+            System.out.println("找到: "+matcher.group(0));
+        }
+    }
+}
