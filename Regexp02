@@ -1,0 +1,24 @@
+package com.hspedu.regexp;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/*
+* 转义字符的使用
+* */
+public class Regexp02 {
+    public static void main(String[] args) {
+        String content = "abc$(a.bc(123(";
+        // 匹配( => \\(
+        // 匹配. ==> \\.
+        // String regStr = "\\.";
+        String regStr = "\\d{3}";// 匹配三个连续任意数字相当于"\\d\\d\\d"
+        Pattern pattern = Pattern.compile(regStr);
+        Matcher matcher = pattern.matcher(content);
+
+        while(matcher.find()){
+            System.out.println("找到"+matcher.group(0));
+        }
+    }
+
+}
