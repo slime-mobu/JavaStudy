@@ -1,0 +1,30 @@
+package com.hspedu.regexp;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/*
+* 演示定位符
+* */
+public class RegExp06 {
+    public static void main(String[] args) {
+        String content = "tyslime slimety tsy";
+        // String content = "123-abc";
+        // 以至少一个数字开头，后接任意个小写字母的字符串
+        // String regStr = "^[0-9]+[a-z]*";
+        // 以至少一个数字开头，必须以任意一个小写字母结束
+        // String regStr = "^[0-9]+\\-[a-z]+$";
+
+        // 表示匹配边界的ty[这里的边界是指：被匹配的字符串最后，
+        // 也可以是空格的子字符串的后面]
+        // String regStr = "ty\\b";
+        String regStr = "ty\\B";// 表示匹配非边界的ty 和\\b 刚好相反
+
+        Pattern pattern = Pattern.compile(regStr);
+        Matcher matcher = pattern.matcher(content);
+
+        while (matcher.find()){
+            System.out.println("找到" +matcher.group(0));
+        }
+    }
+}
