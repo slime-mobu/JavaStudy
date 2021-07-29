@@ -1,0 +1,33 @@
+package com.hspedu.regexp;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/*
+* 演示非捕获分组 语法比较奇怪
+* */
+public class RegExp08 {
+    public static void main(String[] args) {
+        String content = "tyslime tymobu slime slimemobu tyhaha";
+
+        // 找到 tyslime tymobu子字符串
+
+        // String regStr = "tyslime|tymobu";
+        // 上面的写法可以等价非捕获分组 , 注意：不能matcher.group(1)
+        // String regStr = "ty(?:slime|mobu)";
+
+        // 找到 ty 这个关键字 但只是查找tyslime 和 tymobu 中包含的ty
+        // String regStr = "ty(?=slime|mobu)";// 非捕获分组，不能使用matcher.group(1)
+
+        // 找到 ty 这个关键字 但只是查找不是tyslime 和 tymobu 中包含的ty
+        String regStr = "ty(?!slime|mobu)";// 非捕获分组，不能使用matcher.group(1)
+
+        Pattern pattern = Pattern.compile(regStr);
+        Matcher matcher = pattern.matcher(content);
+
+        while(matcher.find()){
+            System.out.println("找到 "+ matcher.group(0));
+        }
+
+    }
+}
