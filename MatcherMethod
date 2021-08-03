@@ -1,0 +1,37 @@
+package com.hspedu.regexp;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/*
+* Matcher 类的常用方法
+* */
+public class MatcherMethod {
+    public static void main(String[] args) {
+
+        String content = "hello ty slime jack tyslime dim hello ethan hello tyslime";
+        String regStr = "hello";
+
+        Pattern pattern = Pattern.compile(regStr);
+        Matcher matcher = pattern.matcher(content);
+
+        while(matcher.find()){
+            System.out.println("==============");
+            System.out.println(matcher.start());
+            System.out.println(matcher.end());
+            System.out.println("找到 "+content.substring(matcher.start(),matcher.end()));
+        }
+
+        // 整体匹配方法,常用于,校验某个字符串是否满足某个规则
+        System.out.println("整体匹配"+matcher.matches());
+
+        // 完成如果 content 有 tyslime 替换成 tymobu
+        regStr = "tyslime";
+        pattern = Pattern.compile(regStr);
+        matcher = pattern.matcher(content);
+        // 注意: 返回的字符串才是替换后的字符串  原来的 content 不会变
+        String newContent = matcher.replaceAll("tymobu");
+        System.out.println("newContent="+newContent);
+        System.out.println("content="+content);
+    }
+}
